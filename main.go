@@ -1,9 +1,11 @@
 package main
 
-import "github.com/vishnu-meera/ihavenoidea_1/dt/basic_array"
+import (
+	"github.com/vishnu-meera/ihavenoidea_1/dt/utils"
+)
 
 func main() {
-	arr := basic_array.GetBasicArray()
+	arr := utils.GetBasicArray()
 
 	for _, value := range arr {
 		println(value)

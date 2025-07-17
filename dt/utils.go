@@ -1,4 +1,4 @@
-package basic_array
+package dt
 
 var basicArray = []int{1, 2, 3, 4, 5}
 
