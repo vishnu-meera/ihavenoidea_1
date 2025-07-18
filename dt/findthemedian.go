@@ -1,6 +1,6 @@
 package dt
 
-func findTheMedian(nums1 []int, nums2 []int) float64 {
+func FindTheMedian(nums1 []int, nums2 []int) float64 {
 	m, n := len(nums1), len(nums2)
 	if m == 0 && n == 0 {
 		return 0
