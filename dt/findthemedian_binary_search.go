@@ -2,9 +2,9 @@ package dt
 
 import "math"
 
-func findMedianSortedArrays(nums1 []int, nums2 []int) float64 {
+func FindMedianSortedArrays(nums1 []int, nums2 []int) float64 {
 	if len(nums1) > len(nums2) {
-		return findMedianSortedArrays(nums2, nums1)
+		return FindMedianSortedArrays(nums2, nums1)
 	}
 
 	m, n := len(nums1), len(nums2)
