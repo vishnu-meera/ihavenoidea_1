@@ -1,4 +1,4 @@
-package dt
+package arrays
 
 import "math"
 

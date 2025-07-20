@@ -1,4 +1,4 @@
-package dt
+package arrays
 
 func FindMin(nums []int) int {
 
