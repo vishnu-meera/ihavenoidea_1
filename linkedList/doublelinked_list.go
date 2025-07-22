@@ -8,7 +8,7 @@ type DNode[T any] struct {
 	prev  *DNode[T]
 }
 
-type DoubleLinkedList[T any] struct {
+type DoubleLinkedList[T comparable] struct {
 	head *DNode[T]
 	tail *DNode[T]
 	size int
@@ -141,4 +141,85 @@ func (dl *DoubleLinkedList[T]) Delete(value T) bool {
 
 func (dl *DoubleLinkedList[T]) isEmpty() bool {
 	return dl.size == 0
+}
+
+func (dl *DoubleLinkedList[T]) Remove(node *DNode[T]) {
+	if node == nil {
+		return 
+	}
+	if node.prev == nil && node.next == nil {
+		dl.head, dl.tail = nil, nil
+		dl.size = 0
+		return
+	}
+	if node.prev == nil {
+		dl.head = dl.head.next
+		dl.head.prev = nil
+		return
+	}
+	if node.next == nil {
+		dl.tail = dl.tail.prev
+		dl.tail.next = nil
+		return
+	}
+	node.prev.next = node.next
+	node.next.prev = node.prev
+	dl.size--
+}
+
+// LRU CACHE
+type CacheEntry[K comparable, V any] struct {
+	key K 
+	value V
+}
+
+type LRUCache[K comparable, V any] struct {
+	capacity int
+	list *DoubleLinkedList[*CacheEntry[K,V]]
+	items map[K]*DNode[*CacheEntry[K,V]]
+}
+
+func NewLRUCache[K comparable, V any](capacity int)*LRUCache[K,V]{
+	return &LRUCache[K, V]{
+		capacity : capacity,
+		list     : &DoubleLinkedList[*CacheEntry[K,V]]{},
+		items	 : make(map[K]*DNode[*CacheEntry[K,V]]),
+	}
+}
+
+func (lru *LRUCache[K,V]) Get(key K)(value V, ok bool){
+	if node, ok := lru.items[key]; ok {
+		lru.list.Remove(node)
+		lru.list.Prepend(node.value)
+		lru.items[key] = lru.list.head
+		return node.value.value, ok
+	}
+	var zero V 
+	return zero, false
+}
+
+func (lru *LRUCache[K,V])Put(key K, value V)(ok bool){
+	if node, ok := lru.items[key]; ok {
+		lru.list.Remove(node)
+		node.value.value = value
+		lru.list.Prepend(node.value)
+		lru.items[key] = lru.list.head
+		return ok
+	}
+	if lru.list.Size() >= lru.capacity{
+		if lru.list.tail != nil {
+			delete(lru.items, lru.list.tail.value.key)
+			lru.list.RemoveFromLast()
+		}
+	}
+	cacheEntry := &CacheEntry[K,V] { key: key, value: value}
+	
+	lru.list.Prepend(cacheEntry)
+	lru.items[key] = lru.list.head
+	return true
+}
+
+func (lru *LRUCache[K, V]) Print() {
+    fmt.Print("LRU Cache Content: ")
+    lru.list.Print()
 }
