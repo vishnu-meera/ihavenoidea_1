@@ -130,3 +130,19 @@ func (ll *LinkedListTail) Remove(val int) {
 	}
 }
 
+func (ll *LinkedList) Reverse(){
+	if ll.head == nil {
+		return
+	}
+
+	cur := ll.head
+	next := nil
+	previous := nil
+
+	for curr != nil {
+		next := curr.next
+		curr.next = prev
+		prev = curr
+		curr = next
+	}
+}
