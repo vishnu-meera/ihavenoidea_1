@@ -88,4 +88,7 @@ func main() {
     if !ok {
         fmt.Println("Key 'b' not found (correctly evicted).")
     }
+
+    fmt.Println("---------------------------")
+    arrays.BenchmarkRingBuffer()
 }

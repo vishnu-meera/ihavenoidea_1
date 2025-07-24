@@ -1,5 +1,6 @@
 package linkedList
 
+import "fmt"
 
 type CNode[T comparable] struct {
 	value T
@@ -18,11 +19,11 @@ func NewCircularDeque[T comparable](capacity int) *CircularDeque[T] {
 	return &CircularDeque[T]{capacity:capacity}
 }
 
-func (cd *CircularDeque[T comparable]) IsEmpty() bool { return cd.size == 0 }
-func (cd *CircularDeque[T comparable]) IsFull() bool { return cd.size == cd.capacity }
+func (cd *CircularDeque[T]) IsEmpty() bool { return cd.size == 0 }
+func (cd *CircularDeque[T]) IsFull() bool { return cd.size == cd.capacity }
 
-func (cd *CircularDeque[T comparable]) PushFront(value T) (ok bool) {
-	if cd.isFull() {
+func (cd *CircularDeque[T]) PushFront(value T) (ok bool) {
+	if cd.IsFull() {
 		return false
 	}
 
@@ -43,8 +44,8 @@ func (cd *CircularDeque[T comparable]) PushFront(value T) (ok bool) {
 	return true
 }
 
-func (cd *CircularDeque[T comparable]) PushBack(value T) (ok bool) {
-	if cd.isFull() {
+func (cd *CircularDeque[T]) PushBack(value T) (ok bool) {
+	if cd.IsFull() {
 		return false
 	}
 
@@ -65,8 +66,8 @@ func (cd *CircularDeque[T comparable]) PushBack(value T) (ok bool) {
 	return true
 }
 
-func (cd *CircularDeque[T comparable]) PopFront() (value T, ok bool) {
-	if cd.isEmpty() {
+func (cd *CircularDeque[T]) PopFront() (value T, ok bool) {
+	if cd.IsEmpty() {
 		var zero T
 		return zero, false
 	}
@@ -78,7 +79,7 @@ func (cd *CircularDeque[T comparable]) PopFront() (value T, ok bool) {
 		return value, true
 	}
 
-	value:= cd.head.value
+	value = cd.head.value
 	cd.head = cd.head.next
 	cd.tail.next = cd.head
 	cd.head.prev = cd.tail
@@ -86,8 +87,8 @@ func (cd *CircularDeque[T comparable]) PopFront() (value T, ok bool) {
 	return value, true
 }
 
-func (cd *CircularDeque[T comparable]) PopBack() (value T, ok bool) {
-	if cd.isEmpty() {
+func (cd *CircularDeque[T]) PopBack() (value T, ok bool) {
+	if cd.IsEmpty() {
 		var zero T
 		return zero, false
 	}	
@@ -100,7 +101,7 @@ func (cd *CircularDeque[T comparable]) PopBack() (value T, ok bool) {
 		return value, true
 	}
 
-	value:= cd.tail.value
+	value = cd.tail.value
 	cd.tail = cd.tail.prev
 	cd.head.prev = cd.tail
 	cd.tail.next = cd.head
