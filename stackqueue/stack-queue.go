@@ -108,11 +108,11 @@ func (ql *QueueList[T]) Dequeue()(value T){
 		var zero T
 		return zero
 	}
-	value := ql.head.value
+	retVal := ql.head.value
 	ql.head = ql.head.next
 	if ql.head == nil {
 		ql.tail = nil
 	}
 	ql.size--
-	return value
+	return retVal
 }

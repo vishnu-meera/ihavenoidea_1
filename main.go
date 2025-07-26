@@ -6,6 +6,7 @@ import (
 	"github.com/vishnu-meera/ihavenoidea_1/arrays"
 	"github.com/vishnu-meera/ihavenoidea_1/stringss"
 	"github.com/vishnu-meera/ihavenoidea_1/linkedList"
+    "github.com/vishnu-meera/ihavenoidea_1/stackqueue"
 )
 
 func main() {
@@ -91,4 +92,18 @@ func main() {
 
     fmt.Println("---------------------------")
     arrays.BenchmarkRingBuffer()
+
+    fmt.Println("---------------------------")
+    fmt.Println("*****************************")
+
+    stack := stackqueue.Constructor()
+	stack.Push(5)
+	stack.Push(1)
+	stack.Push(5)
+	fmt.Println(stack.Top())      // 5
+	fmt.Println(stack.PopMax())  // 5
+	fmt.Println(stack.Top())   // 5
+	fmt.Println(stack.PeekMax())   //     // 5
+	fmt.Println(stack.Pop())      // 10
+	fmt.Println(stack.Top())      // 10
 }
