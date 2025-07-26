@@ -7,6 +7,7 @@ import (
 	"github.com/vishnu-meera/ihavenoidea_1/stringss"
 	"github.com/vishnu-meera/ihavenoidea_1/linkedList"
     "github.com/vishnu-meera/ihavenoidea_1/stackqueue"
+	 "github.com/vishnu-meera/ihavenoidea_1/dp"
 )
 
 func main() {
@@ -106,4 +107,7 @@ func main() {
 	fmt.Println(stack.PeekMax())   //     // 5
 	fmt.Println(stack.Pop())      // 10
 	fmt.Println(stack.Top())      // 10
+	fmt.Println("*****************************")
+	fmt.Println(dp.IsMatch("aa", "a*"))
+
 }
