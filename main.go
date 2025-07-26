@@ -108,6 +108,6 @@ func main() {
 	fmt.Println(stack.Pop())      // 10
 	fmt.Println(stack.Top())      // 10
 	fmt.Println("*****************************")
-	fmt.Println(dp.IsMatch("aa", "a*"))
+	fmt.Println(dp.IsMatch("aab", "c*a*b"))
 
 }

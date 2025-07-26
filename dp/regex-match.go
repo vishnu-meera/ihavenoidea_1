@@ -8,14 +8,14 @@
 		}
 		dp[0][0] = true
 
-		for i := 0; i < plength; i++ {
-			if p[i] == '*' && dp[0][i-1]{
-				dp[0][i+1] = true
+		for j := 0; j < plength; j++ {
+			if p[j] == '*' && dp[0][j-1]{
+				dp[0][j+1] = true
 			}
 		}
 
-		for i := 0; i < slength; i++ {
-			for j := 0; j < plength; j++ {
+		for i := 0; i < slength; i++ {  //a 
+			for j := 0; j < plength; j++ {// *
 				if p[j] == '.' {
 					dp[i+1][j+1] = dp[i][j]
 				}
