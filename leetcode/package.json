@@ -1,0 +1,11 @@
+{
+  "name": "algos-in-my-language",
+  "version": "1.0.0",
+  "description": "\"some nonsense in the world of nonsense\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "vi",
+  "license": "MIT"
+}
