@@ -2,9 +2,9 @@ package trees
 
 type TreeNode struct {
 	value int
-	left *TreeNode
+	left  *TreeNode
 	right *TreeNode
-	size int
+	size  int
 }
 
 type BST struct {
@@ -12,14 +12,14 @@ type BST struct {
 }
 
 func NewBST() *BST {
-	return &BST { root: nil}
+	return &BST{root: nil}
 }
 
-func (t *BST) Add(value int){
-	node := &TreeNode{value : value, size: 1}
+func (t *BST) Add(value int) {
+	node := &TreeNode{value: value, size: 1}
 	if t.root == nil {
 		t.root = node
-	}else {
+	} else {
 		currNode := t.root
 		for {
 			currNode.size++
@@ -27,14 +27,14 @@ func (t *BST) Add(value int){
 				if currNode.right == nil {
 					currNode.right = node
 					break
-				}else {
+				} else {
 					currNode = currNode.right
 				}
 			} else {
 				if currNode.left == nil {
 					currNode.left = node
 					break
-				}else {
+				} else {
 					currNode = currNode.left
 				}
 			}
@@ -42,24 +42,24 @@ func (t *BST) Add(value int){
 	}
 }
 
-func (t *BST) PreOrder()[]int{
+func (t *BST) PreOrder() []int {
 	var result []int
 	var stack []*TreeNode
 	if t.root == nil {
 		return result
 	}
-	stack = append(stack,t.root)
+	stack = append(stack, t.root)
 
-	for len(stack) >0 {
+	for len(stack) > 0 {
 		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 		if node != nil {
 			result = append(result, node.value)
-			if node.right != nil{
-				stack = append(stack,node.right)
+			if node.right != nil {
+				stack = append(stack, node.right)
 			}
 			if node.left != nil {
-				stack = append(stack,node.left)
+				stack = append(stack, node.left)
 			}
 		}
 	}
@@ -67,31 +67,31 @@ func (t *BST) PreOrder()[]int{
 	return result
 }
 
-func (t *BST) PostOrder()[]int{
+func (t *BST) PostOrder() []int {
 	var result []int
 	var temp []int
 	var stack []*TreeNode
 	if t.root == nil {
 		return temp
 	}
-	stack = append(stack,t.root)
+	stack = append(stack, t.root)
 
-	for len(stack) >0 {
+	for len(stack) > 0 {
 		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 		if node != nil {
 			temp = append(temp, node.value)
-			if node.left != nil{
-				stack = append(stack,node.left)
+			if node.left != nil {
+				stack = append(stack, node.left)
 			}
 			if node.right != nil {
-				stack = append(stack,node.right)
+				stack = append(stack, node.right)
 			}
 		}
 	}
 
 	for len(temp) > 0 {
-		value := temp[len(temp) -1]
+		value := temp[len(temp)-1]
 		temp = temp[:len(temp)-1]
 		result = append(result, value)
 	}
@@ -99,7 +99,7 @@ func (t *BST) PostOrder()[]int{
 	return result
 }
 
-func (t *BST) InOrder()[]int{
+func (t *BST) InOrder() []int {
 	var result []int
 	var stack []*TreeNode
 	if t.root == nil {
@@ -107,7 +107,7 @@ func (t *BST) InOrder()[]int{
 	}
 	currNode := t.root
 
-	for currNode != nil || len(stack) >0 {
+	for currNode != nil || len(stack) > 0 {
 		for currNode != nil {
 			stack = append(stack, currNode)
 			currNode = currNode.left
@@ -138,7 +138,7 @@ func (t *BST) Remove(value int) bool {
 			parent = currNode
 			currNode = currNode.right
 		} else {
-			if currNode.left != nil && curr.Node.right != nil{
+			if currNode.left != nil && curr.Node.right != nil {
 				succParent = currNode
 				succ = currNode.right
 
@@ -171,7 +171,7 @@ func (t *BST) Remove(value int) bool {
 			return true
 		}
 	}
-	return false 
+	return false
 }
 
 func (t *BST) Search(value int) bool {
@@ -183,9 +183,9 @@ func (t *BST) Search(value int) bool {
 	for curr != nil {
 		if value == curr.value {
 			return true
-		}else if value < curr.value {
+		} else if value < curr.value {
 			curr = curr.left
-		}else {
+		} else {
 			curr = curr.right
 		}
 	}
@@ -197,7 +197,7 @@ func (t *BST) Min() (int, bool) {
 		return 0, false
 	}
 
-	n := t.root 
+	n := t.root
 	for n.left != nil {
 		n = n.left
 	}
@@ -209,7 +209,7 @@ func (t *BST) Max() (int, bool) {
 		return 0, false
 	}
 
-	n := t.root 
+	n := t.root
 	for n.right != nil {
 		n = n.right
 	}
@@ -221,9 +221,9 @@ func (t *BST) GetNode(value int) (*TreeNode, bool) {
 	for n != nil {
 		if value < n.value {
 			n = n.left
-		}else if value > n.value {
+		} else if value > n.value {
 			n = n.right
-		}else {
+		} else {
 			return n, true
 		}
 	}
@@ -231,28 +231,28 @@ func (t *BST) GetNode(value int) (*TreeNode, bool) {
 }
 
 func (t *BST) InOrderSuccessor(value int) (*TreeNode, bool) {
-	currNode:= t.root
+	currNode := t.root
 	var succ *TreeNode
 
 	for currNode != nil {
 		if value < currNode.value {
 			succ = currNode
 			currNode = currNode.left
-		}else if value > currNode.value {
+		} else if value > currNode.value {
 			currNode = currNode.right
 		} else {
 			break
 		}
 	}
 
-	if currNode == nil{
+	if currNode == nil {
 		return nil, false
 	}
 
 	if currNode.right != nil {
-		currNode = currNode.right 
+		currNode = currNode.right
 		for currNode.left != nil {
-			currNode = currNode.left 
+			currNode = currNode.left
 		}
 		return currNode, true
 	}
@@ -265,12 +265,12 @@ func (t *BST) InOrderSuccessor(value int) (*TreeNode, bool) {
 }
 
 func IsBST(root *TreeNode) bool {
-	currNode:= root
+	currNode := root
 	var stack []*TreeNode
 	var prev int
 	hasPrevious := false
 
-	for currNode != nil || len(stack) > 0 { 
+	for currNode != nil || len(stack) > 0 {
 		for currNode != nil {
 			stack = append(stack, currNode)
 			currNode = currNode.left
@@ -279,7 +279,7 @@ func IsBST(root *TreeNode) bool {
 		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 
-		if(hasPrevious && node.value<=prev){
+		if hasPrevious && node.value <= prev {
 			return false
 		}
 
@@ -292,14 +292,14 @@ func IsBST(root *TreeNode) bool {
 }
 
 type bounds struct {
-	node *TreeNode
-	min, max int
+	node           *TreeNode
+	min, max       int
 	minSet, maxSet bool
 }
 
 func IsBST(root *TreeNode) bool {
 	stack := []bounds{{node: root}}
-	for len(stack) >0 {
+	for len(stack) > 0 {
 		bound := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 		value := bound.node.value
@@ -313,28 +313,28 @@ func IsBST(root *TreeNode) bool {
 
 		if bound.node.right != nil {
 			stack = append(stack, bounds{
-				node: bound.node.right,
-				max: bound.max, 
+				node:   bound.node.right,
+				max:    bound.max,
 				maxSet: bound.maxSet,
-				min: value,
-				minSet: true
+				min:    value,
+				minSet: true,
 			})
-		} 
+		}
 
 		if bound.node.left != nil {
 			stack = append(stack, bounds{
-				node: bound.node.left,
-				min: bound.min, 
+				node:   bound.node.left,
+				min:    bound.min,
 				minSet: bound.minSet,
-				max: value,
-				maxSet: true
+				max:    value,
+				maxSet: true,
 			})
-		} 
+		}
 	}
 	return true
 }
 
-func ConvertToSortedArray(root *TreeNode)[]int {
+func ConvertToSortedArray(root *TreeNode) []int {
 	var result []int
 	if root == nil {
 		return result
@@ -359,40 +359,40 @@ func ConvertToSortedArray(root *TreeNode)[]int {
 }
 
 func KthElement(root *TreeNode, k int) (int, bool) {
-    if root == nil || k <= 0 || k > root.size {
-        return 0, false
-    }
-    curr := root
-    for curr != nil {
-        leftSize := 0
-        if curr.left != nil {
-            leftSize = curr.left.size
-        }
-        if k == leftSize+1 {
-            return curr.value, true
-        } else if k <= leftSize {
-            curr = curr.left
-        } else {
-            k = k - leftSize - 1
-            curr = curr.right
-        }
-    }
-    return 0, false
+	if root == nil || k <= 0 || k > root.size {
+		return 0, false
+	}
+	curr := root
+	for curr != nil {
+		leftSize := 0
+		if curr.left != nil {
+			leftSize = curr.left.size
+		}
+		if k == leftSize+1 {
+			return curr.value, true
+		} else if k <= leftSize {
+			curr = curr.left
+		} else {
+			k = k - leftSize - 1
+			curr = curr.right
+		}
+	}
+	return 0, false
 }
 
-func LCA(a *TreeNode, b *TreeNode, root *TreeNode) (*TreeNode,bool) {
-    if root == nil {
-        return nil, false
-    }
-    curr := root
-    for curr != nil {
-		if a.value < curr.value &&  b.value < curr.value {
+func LCA(a *TreeNode, b *TreeNode, root *TreeNode) (*TreeNode, bool) {
+	if root == nil {
+		return nil, false
+	}
+	curr := root
+	for curr != nil {
+		if a.value < curr.value && b.value < curr.value {
 			curr = curr.left
-		}else if a.value > curr.value && b.value > curr.value {
+		} else if a.value > curr.value && b.value > curr.value {
 			curr = curr.right
-		}else {
+		} else {
 			return curr, true
 		}
-    }
-    return nil, false
+	}
+	return nil, false
 }
